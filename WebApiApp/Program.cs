@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
+using WebApiApp.ServiceContracts;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 try
@@ -17,7 +18,7 @@ try
     });
 
     builder.Services.AddSingleton(new Database("Data Source=swiftmessages.db"));
-    builder.Services.AddSingleton<SwiftParser>();
+    builder.Services.AddSingleton<ISwiftParser, SwiftParser>();
 
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
