@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApiApp.ServiceContracts;
 
 /// <summary>
 /// Controller for processing SWIFT MT799 messages.
@@ -7,7 +8,7 @@
 [Route("[controller]")]
 public class SwiftController : ControllerBase
 {
-    private readonly SwiftParser _swiftParser;
+    private readonly ISwiftParser _swiftParser;
     private readonly Database _database;
     private readonly ILogger<SwiftController> _logger;
 
@@ -17,7 +18,7 @@ public class SwiftController : ControllerBase
     /// <param name="swiftParser">The parser for SWIFT messages.</param>
     /// <param name="database">The database for storing messages.</param>
     /// <param name="logger">The logger for recording information.</param>
-    public SwiftController(SwiftParser swiftParser, Database database, ILogger<SwiftController> logger)
+    public SwiftController(ISwiftParser swiftParser, Database database, ILogger<SwiftController> logger)
     {
         _swiftParser = swiftParser;
         _database = database;
